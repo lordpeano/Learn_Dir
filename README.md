@@ -1,4 +1,6 @@
-Learn_Dir
+## Learn_Dir
 =========
 
-this is only for learning purposes.  Anything added will be subject to removal at any time.
+* this is only for learning purposes.
+* Anything added will be removed at my discrection
+
