@@ -1,0 +1,40 @@
+
+type_id_in ="heart attack"
+num_scores = 10
+state = "TX"
+my_outcome<-read.csv("outcome-of-care-measures.csv",colClasses = "character")
+
+reduced_data <- my_outcome[c(1,2,7,11,17,23)]
+colnames(reduced_data)
+colnames(reduced_data)<-c("ID","Hospital","State","Attack","Failure","Pneumonia")
+Attack = 4
+Failure = 5
+Pneumonia = 6
+
+if (type_id_in == "heart attack"){type_id =Attack}
+if (type_id_in == "heart failure"){type_id = Failure}
+if (type_id_in == "pneumonia"){ type_id = Pneumonia}
+
+type_col<-as.numeric(type_id)
+type_data_temp <- reduced_data[ ,c(1,2,3,type_col)]
+type_data<-temp <-subset(reduced_data,reduced_data$State==state)
+type_scores <- sort(type_data[,type_id],na.last=NA,index.return=T)
+type_sort<- sort(unique((type_data[type_id])))
+
+# max number of entries would be the number of requested
+# but a single values could have more that one hospital.
+# hence either use while and flag or break from loop
+# decided on for.  while makes it harder to find the remaining data
+
+ifelse(num_scores=="all", type_num=length(type_scores),type_num =num_scores)
+
+type_num = 6
+ 
+check_end = 0 #check to see if num_scores has been reaches
+for( i in c(1:num_scores))
+      {
+        type_freq[2,i]<-sum(reduced_data[ ,type_col]==type_scores[i])
+        check_end =check_end +as.numeric(type_freq[2,i])
+        if(check_end >= type_num){break;}
+      }
+
